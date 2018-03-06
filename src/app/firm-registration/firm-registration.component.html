@@ -1,0 +1,9 @@
+<div style="text-align:center">
+  <mat-form-field>
+    <mat-select placeholder="Kategorije poslova">
+      <mat-option *ngFor="let posao of poslovi" [value]="posao.value">
+        {{ posao.viewValue }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

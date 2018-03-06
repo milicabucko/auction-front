@@ -1,0 +1,75 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+    <h1>Registracija korisnika</h1>
+  	<div *ngIf="!registrationFirm">
+    <form class="example-form" [formGroup]="registrationForm">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Vase ime" formControlName="ime"> 
+      </mat-form-field> <br>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Email" formControlName="email">
+      </mat-form-field><br>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Korisnicko ime" formControlName="korisnickoIme">
+      </mat-form-field><br>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Lozinka" formControlName="lozinka">
+      </mat-form-field><br>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Adresa" formControlName="adresa">
+      </mat-form-field><br>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Mesto stanovanja" formControlName="mestoStanovanja">
+      </mat-form-field><br>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Postanski broj" formControlName="postanskiBroj">
+      </mat-form-field><br>
+  
+      <mat-form-field>
+        <mat-select placeholder="Vrsta korisnika" formControlName="tipKorisnika">
+          <mat-option *ngFor="let korisnik of korisnici" [value]="korisnik.value" (click)="izaberiTip()">
+            {{ korisnik.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+  
+    </form>
+    </div>
+    <div *ngIf="registrationFirmForm">
+      <form class="example-form" [formGroup]="registrationFirm" (click)=registrationFirm()>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Ime firme" value="ime" formControlName="ime"> 
+        </mat-form-field> <br>
+        
+    
+        <mat-form-field>
+          <mat-select placeholder="Kategorije poslova">
+            <mat-option *ngFor="let kategorija of kategorije" formControlName="kategorija" [value]="kategorija.value">
+              {{ kategorija.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field><br>
+
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Udaljenost" value="udaljenost" formControlName="udaljenost"> 
+        </mat-form-field>
+
+        <a routerLink="/login" class="btn btn-outline-dark">Odustani</a>
+        <button [disabled]="!registrationFirm.valid" type="submit" class="btn btn-outline-dark">Registruj se</button>
+      </form>
+
+
+    </div>
+
+    <div align="right" *ngIf="!registrationFirm">
+      <button mat-button routerLink="/login">Odustani!</button>
+      <button mat-button *ngIf="!firma" [disabled]="!registrationForm.valid" (click)="registration()"> Registruj se!</button>
+   
+  
+      <button mat-button *ngIf="firma" routerLink="/firmRegistration" (click)="registration()" [disabled]="!registrationForm.valid" mat-button >Nastavi!</button>
+    </div>
+       
+    
+  
+  </div>
