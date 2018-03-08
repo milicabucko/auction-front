@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RegistrationServiceService } from './registration-service.service';
+import { Task } from './task';
 
 @Component({
   selector: 'app-registation',
@@ -14,7 +15,8 @@ export class RegistationComponent implements OnInit {
   registrationForm : FormGroup;
   registrationFirm : FormGroup;
   registrationFirmForm : boolean = false;
-
+  taskId: string;
+  task: Task;
 
   constructor(private registrationService : RegistrationServiceService) { }
 
@@ -34,6 +36,14 @@ export class RegistationComponent implements OnInit {
       tipKorisnika: new FormControl('', [Validators.required])
 
     })
+
+    this.registrationService.activateProcess().subscribe(
+      data=> {
+        this.taskId = data.id;
+        console.log("data" + data.id);
+      }
+    )
+
   }
 
   izaberiTip(){
@@ -44,11 +54,27 @@ export class RegistationComponent implements OnInit {
     }
   }
 
-  registration(){
-    let value = this.registrationForm.value;
-    //this.registrationService.registration(value).sub
+   registration(){
+     let value = this.registrationForm.value;
+     this.registrationService.registration(value,this.taskId)
+            .subscribe(data=>{
+                console.log(data.ime);
+                this.task = data;
 
-  }
+            })
+
+   }
+
+  // registration(){
+  //   this.registrationService.activateProcess().subscribe(
+  //     data=> {
+  //       this.taskId = data.taskId;
+  //       console.log("data" + data);
+  //     }
+  //   )
+  // }
+
+  
 
   enable(korisnik){
     alert(":::")

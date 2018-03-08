@@ -50,6 +50,8 @@ import { AppRoutingModule,routingComponents } from './/app-routing.module';
 import { LoginComponent } from './login/login.component';
 import { FirmRegistrationComponent } from './firm-registration/firm-registration.component';
 
+import { RegistrationServiceService } from './registation/registration-service.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -97,7 +99,7 @@ import { FirmRegistrationComponent } from './firm-registration/firm-registration
     RouterModule,
     AppRoutingModule
     ],
-  providers: [],
+  providers: [RegistrationServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
