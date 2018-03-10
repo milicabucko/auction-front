@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RegistrationServiceService } from './registration-service.service';
 import { Task } from './task';
+import { Firma } from './firma';
 
 @Component({
   selector: 'app-registation',
@@ -11,12 +12,15 @@ import { Task } from './task';
 export class RegistationComponent implements OnInit {
 
 
-  firma: boolean = false;
+  firmaJe: boolean = false;
   registrationForm : FormGroup;
   registrationFirm : FormGroup;
   registrationFirmForm : boolean = false;
   taskId: string;
   task: Task;
+  kategorije = [];   
+ 
+  firma : Firma;
 
   constructor(private registrationService : RegistrationServiceService) { }
 
@@ -44,13 +48,19 @@ export class RegistationComponent implements OnInit {
       }
     )
 
+    this.registrationService.kategorijeFirme()
+   .subscribe(data => {
+     console.log("Data value" + data.value + "ime " + data.ime + "data " + data + "id " + data.id);  
+     this.kategorije=data;
+   
+   })
   }
 
   izaberiTip(){
     if(this.registrationForm.controls['tipKorisnika'].value === 'firma'){
-      this.firma = true;
+      this.firmaJe = true;
     }else{
-      this.firma = false;
+      this.firmaJe = false;
     }
   }
 
@@ -60,19 +70,40 @@ export class RegistationComponent implements OnInit {
             .subscribe(data=>{
                 console.log(data.ime);
                 this.task = data;
+                if(data.ime === "firma"){
+                  this.registrationFirm = new FormGroup({
+                    kategorija : new FormControl('',[Validators.required]),
+                    udaljenost : new FormControl('10',[Validators.required]),
+                    ime : new FormControl('firma M',[Validators.required])
+                  });
+
+                console.log("kategorije " + this.kategorije);
+						    this.registrationFirmForm = true;
+                }
 
             })
 
    }
 
-  // registration(){
-  //   this.registrationService.activateProcess().subscribe(
-  //     data=> {
-  //       this.taskId = data.taskId;
-  //       console.log("data" + data);
-  //     }
-  //   )
-  // }
+   registrationFirmButton(){
+    let value = this.registrationFirm.value;
+    this.firma = new Firma(value.ime, value.udaljenost, value.kategorija, value.korisnickoIme);
+    this.registrationService.registrationFirm(this.firma, this.task.taskId).subscribe
+            (data=>{console.log("firma " + data)})
+
+   }
+
+   izaberiKategoriju(){
+    this.registrationService.kategorijeFirme()
+    .subscribe(data => {
+      console.log("Data " + data.ime);  
+      this.kategorije=data;
+    
+    })
+   }
+
+  
+
 
   
 
@@ -85,6 +116,9 @@ export class RegistationComponent implements OnInit {
       this.omoguci=true;
     }
   }
+
+ 
+
 
   korisnici = [
     {value: 'firma', viewValue: 'Firma'},

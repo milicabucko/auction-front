@@ -37,16 +37,16 @@
     </form>
     </div>
     <div *ngIf="registrationFirmForm">
-      <form class="example-form" [formGroup]="registrationFirm" (click)=registrationFirm()>
+      <form class="example-form" [formGroup]="registrationFirm" (click)=registrationFirmButton()>
         <mat-form-field class="example-full-width">
           <input matInput placeholder="Ime firme" value="ime" formControlName="ime"> 
         </mat-form-field> <br>
         
     
         <mat-form-field>
-          <mat-select placeholder="Kategorije poslova">
-            <mat-option *ngFor="let kategorija of kategorije" formControlName="kategorija" [value]="kategorija.value">
-              {{ kategorija.viewValue }}
+          <mat-select placeholder="Kategorije poslova" (change)="izaberiKategoriju()"> 
+            <mat-option *ngFor="let kategorija of kategorije" formControlName="kategorija"> 
+              {{ kategorija.ime }} {{kategorija.id}}
             </mat-option>
           </mat-select>
         </mat-form-field><br>
@@ -56,7 +56,7 @@
         </mat-form-field>
 
         <a routerLink="/login" class="btn btn-outline-dark">Odustani</a>
-        <button [disabled]="!registrationFirm.valid" type="submit" class="btn btn-outline-dark">Registruj se</button>
+        <button [disabled]="!registrationFirmButton.valid" type="submit" class="btn btn-outline-dark">Registruj se</button>
       </form>
 
 
@@ -64,10 +64,10 @@
 
     <div align="right" *ngIf="!registrationFirm">
       <button mat-button routerLink="/login">Odustani!</button>
-      <button mat-button *ngIf="!firma" [disabled]="!registrationForm.valid" (click)="registration()"> Registruj se!</button>
+      <button mat-button *ngIf="!firmaJe" [disabled]="!registrationForm.valid" (click)="registration()"> Registruj se!</button>
    
   
-      <button mat-button *ngIf="firma" routerLink="/firmRegistration" (click)="registration()" [disabled]="!registrationForm.valid" mat-button >Nastavi!</button>
+      <button mat-button *ngIf="firmaJe" routerLink="/firmRegistration" (click)="registration()" [disabled]="!registrationForm.valid" mat-button >Nastavi!</button>
     </div>
        
     
