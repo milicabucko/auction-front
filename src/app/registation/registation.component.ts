@@ -14,32 +14,36 @@ export class RegistationComponent implements OnInit {
 
   firmaJe: boolean = false;
   registrationForm : FormGroup;
-  registrationFirm : FormGroup;
-  registrationFirmForm : boolean = false;
+  firmaForm : FormGroup;
   taskId: string;
-  task: Task;
-  kategorije = [];   
- 
-  firma : Firma;
+  firmaTaskId: string;
+  kategorije: any;
+
+  aktivnaStranica: String;
 
   constructor(private registrationService : RegistrationServiceService) { }
 
-  public omoguci;
+  ngOnInit() {
 
-  ngOnInit(){
-    this.omoguci = true;
+    this.aktivnaStranica = "korisnik";
+    
     this.registrationForm = new FormGroup({
-      ime: new FormControl('Maksi',[Validators.required]),
+      ime: new FormControl('Milica',[Validators.required]),
       prezime: new FormControl('Bucko',[Validators.required]),
-      email: new FormControl('maksi@gmail.com',[Validators.required, Validators.email]),
-      korisnickoIme: new FormControl('maksi', [Validators.required]),
-      lozinka: new FormControl('maksi', [Validators.required]),
+      email: new FormControl('mb@gmail.com',[Validators.required, Validators.email]),
+      korisnickoIme: new FormControl('m', [Validators.required]),
+      lozinka: new FormControl('m', [Validators.required]),
       mestoStanovanja: new FormControl('Backa P', Validators.required),
       adresa: new FormControl('ILR', [Validators.required]),
       postanskiBroj: new FormControl('21400', [Validators.required]),
       tipKorisnika: new FormControl('', [Validators.required])
-
     })
+
+    this.firmaForm = new FormGroup({
+      kategorija: new FormControl('',[Validators.required]),
+      udaljenost: new FormControl('10',[Validators.required]),
+      imeFirme: new FormControl('firma M',[Validators.required])
+    });
 
     this.registrationService.activateProcess().subscribe(
       data=> {
@@ -48,77 +52,35 @@ export class RegistationComponent implements OnInit {
       }
     )
 
-    this.registrationService.kategorijeFirme()
-   .subscribe(data => {
-     console.log("Data value" + data.value + "ime " + data.ime + "data " + data + "id " + data.id);  
-     this.kategorije=data;
-   
-   })
-  }
-
-  izaberiTip(){
-    if(this.registrationForm.controls['tipKorisnika'].value === 'firma'){
-      this.firmaJe = true;
-    }else{
-      this.firmaJe = false;
-    }
-  }
-
-   registration(){
-     let value = this.registrationForm.value;
-     this.registrationService.registration(value,this.taskId)
-            .subscribe(data=>{
-                console.log(data.ime);
-                this.task = data;
-                if(data.ime === "firma"){
-                  this.registrationFirm = new FormGroup({
-                    kategorija : new FormControl('',[Validators.required]),
-                    udaljenost : new FormControl('10',[Validators.required]),
-                    ime : new FormControl('firma M',[Validators.required])
-                  });
-
-                console.log("kategorije " + this.kategorije);
-						    this.registrationFirmForm = true;
-                }
-
-            })
-
-   }
-
-   registrationFirmButton(){
-    let value = this.registrationFirm.value;
-    this.firma = new Firma(value.ime, value.udaljenost, value.kategorija, value.korisnickoIme);
-    this.registrationService.registrationFirm(this.firma, this.task.taskId).subscribe
-            (data=>{console.log("firma " + data)})
-
-   }
-
-   izaberiKategoriju(){
-    this.registrationService.kategorijeFirme()
-    .subscribe(data => {
-      console.log("Data " + data.ime);  
-      this.kategorije=data;
-    
+    this.registrationService.kategorijeFirme().subscribe(data => { 
+     this.kategorije = data;
     })
-   }
-
-  
-
-
-  
-
-  enable(korisnik){
-    alert(":::")
-    if(korisnik == "firma"){
-      alert("!!!!!!")
-      this.omoguci=false;
-    }else{
-      this.omoguci=true;
-    }
   }
 
- 
+  atp() {
+    this.registrationService.atp().subscribe(data=>{
 
+    })
+  }
+
+  save() {
+    this.registrationService.saveKorisnik(this.registrationForm.value, this.taskId).subscribe(data=>{
+      if(data.korisnik.tipKorisnika  === "firma"){
+        alert("firma!");
+        this.firmaTaskId = data.taskId;
+        this.aktivnaStranica = "firma";
+      }
+    })
+  }
+
+  saveFirma() {
+    this.registrationService.saveKorisnikFirma(this.registrationForm.value, this.firmaForm.value, this.firmaTaskId).subscribe(data=>{
+      if(data.korisnik.tipKorisnika  === "firma"){
+        alert("firma sacuvana! Kategorija firme je: " + data.korisnik.kategorija);
+        this.aktivnaStranica = "firma";
+      }
+    })
+  }
 
   korisnici = [
     {value: 'firma', viewValue: 'Firma'},

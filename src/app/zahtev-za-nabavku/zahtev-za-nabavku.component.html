@@ -1,0 +1,79 @@
+<form [formGroup]="zahtevZaNabavkuForm" (submit) = "save()">
+    
+    <div class="form-group">
+        <mat-form-field>
+            <mat-select placeholder="Kategorija" 
+                        class="form-control"
+                        formControlName="kategorija" 
+                        require>
+              <mat-option *ngFor="let kat of kategorije" value="{{kat.ime}}">{{kat.ime}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field>
+        <textarea type="text"
+                matInput 
+                placeholder="Opis" 
+                class="form-control"
+                formControlName="opis" 
+                required>
+        </textarea>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field>
+        <input type="number"
+                matInput 
+                placeholder="Maksimalna vrijednost" 
+                class="form-control"
+                formControlName="maxVrijednost" 
+                required>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field>
+        <input [matDatepicker]="rokZaPonude" 
+                matInput
+                placeholder="Rok za ponude"
+                class="form-control"
+                formControlName="rokZaPonude" >
+        <mat-datepicker-toggle matSuffix [for]="rokZaPonude">
+        </mat-datepicker-toggle>
+        <mat-datepicker #rokZaPonude></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+
+    <div class="form-group">
+      <mat-form-field>
+        <input type="number"
+                matInput 
+                placeholder="Maksimalan broj ponuda" 
+                class="form-control"
+                formControlName="maxBrojPonuda" 
+                required>
+      </mat-form-field>
+    </div>
+
+
+    <div class="form-group">
+      <mat-form-field>
+        <input [matDatepicker]="rokZaNabavku"
+                matInput
+                placeholder="Rok za nabavku"
+                class="form-control"
+                formControlName="rokZaNabavku" >
+        <mat-datepicker-toggle matSuffix [for]="rokZaNabavku">
+        </mat-datepicker-toggle>
+        <mat-datepicker #rokZaNabavku></mat-datepicker>
+      </mat-form-field>
+    </div>  
+
+
+    <button mat-button type="submit" [disabled] = "!zahtevZaNabavkuForm.valid">Potvrdi zahtev!</button>
+  
+  </form>

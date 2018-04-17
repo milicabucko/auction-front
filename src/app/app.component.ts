@@ -19,19 +19,19 @@ export class AppComponent implements OnInit{
 
   
 
-  enable(korisnik){
-    alert(":::")
-    if(korisnik == "firma"){
-      alert("!!!!!!")
-      this.omoguci=false;
-    }else{
-      this.omoguci=true;
-    }
-  }
+  // enable(korisnik){
+  //   alert(":::")
+  //   if(korisnik == "firma"){
+  //     alert("!!!!!!")
+  //     this.omoguci=false;
+  //   }else{
+  //     this.omoguci=true;
+  //   }
+  // }
 
-  korisnici = [
-    {value: 'firma', viewValue: 'Firma'},
-    {value: 'korisnik', viewValue: 'Korisnik'}
-  ];
+  // korisnici = [
+  //   {value: 'firma', viewValue: 'Firma'},
+  //   {value: 'korisnik', viewValue: 'Korisnik'}
+  // ];
 
 }

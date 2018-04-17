@@ -14,9 +14,16 @@ export class RegistrationServiceService {
 
   constructor(private http : Http) { }
 
-   registration(korisnik:any, taskId:string): Observable<Task>{
-     return this.http.post(this.url + "/registration/" + taskId, korisnik).map(res=>res.json());
-   }
+  saveKorisnik(korisnik:any, taskId:string){
+    return this.http.post(this.url + "/registration/" + taskId, korisnik).map(res=>res.json());
+  }
+
+  saveKorisnikFirma(korisnik:any, firma:any, taskId:string){
+    korisnik.imeFirme = firma.imeFirme;
+    korisnik.udaljenost = firma.udaljenost;
+    korisnik.kategorija = firma.kategorija;
+    return this.http.post(this.url + "/registration/firma/" + taskId, korisnik).map(res=>res.json());
+  }
 
   activateProcess(){
     return this.http.get(this.url + "/registration/activateProcess").map(res=>res.json());
@@ -25,11 +32,14 @@ export class RegistrationServiceService {
   registrationFirm(firma: Firma, taskId:string):Observable<Task>{
     return this.http.post(this.url + "/registration/firm" + taskId, firma).map(res=>res.json());
   }
+
+  atp() {
+    return this.http.get(this.url + "/registration/atp").map(res=>res.json());
+  }
   
 
-  kategorijeFirme(){
-    console.log("Service");
-    return this.http.get(this.url + "/registration/getCategory").map(res =>res.json());
+  kategorijeFirme() {
+    return this.http.get(this.url + "/registration/kategorije").map(res =>res.json());
   }
 
 }

@@ -51,13 +51,15 @@ import { LoginComponent } from './login/login.component';
 import { FirmRegistrationComponent } from './firm-registration/firm-registration.component';
 
 import { RegistrationServiceService } from './registation/registration-service.service';
+import { ZahtevZaNabavkuComponent } from './zahtev-za-nabavku/zahtev-za-nabavku.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     routingComponents,
     LoginComponent,
-    FirmRegistrationComponent
+    FirmRegistrationComponent,
+    ZahtevZaNabavkuComponent
   ],
   imports: [
     FormsModule,

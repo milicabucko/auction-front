@@ -9,9 +9,8 @@ import { FirmRegistrationComponent } from './firm-registration/firm-registration
 const routes : Routes = [
   { path: 'registration', component: RegistationComponent},
   { path: 'firstPage', component:FirstPageComponent},
-  { path: 'login', component:LoginComponent},
-  { path: 'firmRegistration' , component:FirmRegistrationComponent}
-];
+  { path: 'login', component:LoginComponent}
+]
 
 @NgModule({
   imports: [

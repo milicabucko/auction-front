@@ -1,9 +1,9 @@
-<form class="example-form" (ngSubmit)="login()">
+<form class="example-form" (ngSubmit)="login()" [formGroup]="loginForm">
   <mat-form-field class="example-full-width">
-    <input matInput placeholder="Korisnicko ime" value="">
+    <input matInput placeholder="Korisnicko ime" value="" formControlName="korisnickoIme">
   </mat-form-field> <br>
   <mat-form-field class="example-full-width">
-    <input matInput placeholder="Lozinka" value="">
+    <input matInput placeholder="Lozinka" value="" formControlName="lozinka">
   </mat-form-field><br>
 
   <a routerLink="/registration" class="btn btn-link">Registruj se!</a>
