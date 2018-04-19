@@ -1,0 +1,49 @@
+<div *ngFor="let task of activeTasks">
+  <button mat-button (click)="activeTask=task">{{task}}</button>
+</div>
+
+<h1> Aktivan task: {{activeTask}} </h1>
+
+<form [formGroup]="ponudaForm" (submit) = "save()">
+
+  <div class="form-group">
+    <mat-form-field>
+      <input type="number"
+              matInput 
+              placeholder="Cena" 
+              class="form-control"
+              formControlName="cena" 
+              required>
+    </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <mat-form-field>
+      <input [matDatepicker]="rokZaIzvrsavanje"
+              matInput
+              placeholder="Rok za izvrstavanje"
+              class="form-control"
+              formControlName="rokZaIzvrsavanje" >
+      <mat-datepicker-toggle matSuffix [for]="rokZaIzvrsavanje">
+      </mat-datepicker-toggle>
+      <mat-datepicker #rokZaIzvrsavanje></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <mat-form-field>
+        <mat-select placeholder="Status" 
+                    class="form-control"
+                    formControlName="status" 
+                    required>
+          <mat-option value="POSLATA"> Posalji </mat-option>
+          <mat-option value="ODBIJENA"> Odustani </mat-option>
+        </mat-select>
+      </mat-form-field>
+  </div>
+
+
+  <button mat-button type="submit" [disabled] = "!ponudaForm.valid">Sacuvaj!</button>
+
+</form>
+

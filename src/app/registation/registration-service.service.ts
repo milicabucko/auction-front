@@ -42,4 +42,24 @@ export class RegistrationServiceService {
     return this.http.get(this.url + "/registration/kategorije").map(res =>res.json());
   }
 
+  activateProcessAukcija(){
+    return this.http.get(this.url + "/aukcija/activateProcess").map(res=>res.json());
+  }
+
+  saveZahtevZaNabavku(zahtev: any, korisnikID: number, taskId) {
+    return this.http.post(this.url + "/aukcija/zahtevZaNabavku/save/" + taskId + "/" + korisnikID, zahtev).map(res=>res.json());
+  }
+
+  getkategorijePosla() {
+    return this.http.get(this.url + "/aukcija/kategorijePosla").map(res =>res.json());
+  }
+
+  savePonuda(ponuda: any, korisnikID, taskId) {
+    return this.http.post(this.url + "/ponude/sacuvajPonudu/" + korisnikID + "/" + taskId, ponuda).map(res=>res.json());
+  }
+
+  getAllActiveUserTasks(korisnikID) {
+    return this.http.get(this.url + "/ponude/getAllActiveUserTasks/" + korisnikID).map(res =>res.json());
+  }
+
 }
