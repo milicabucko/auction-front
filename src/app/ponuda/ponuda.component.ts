@@ -41,7 +41,7 @@ export class PonudaComponent implements OnInit {
   }
 
   save() {
-    this.registrationService.savePonuda(this.ponudaForm.value, this.korisnikID, this.taskId).subscribe(data=>{
+    this.registrationService.savePonuda(this.ponudaForm.value, this.korisnikID, this.activeTask).subscribe(data=>{
       alert('Sacuvan izbor (ponuda)');
     })
   }

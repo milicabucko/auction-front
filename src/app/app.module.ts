@@ -53,6 +53,7 @@ import { FirmRegistrationComponent } from './firm-registration/firm-registration
 import { RegistrationServiceService } from './registation/registration-service.service';
 import { ZahtevZaNabavkuComponent } from './zahtev-za-nabavku/zahtev-za-nabavku.component';
 import { PonudaComponent } from './ponuda/ponuda.component';
+import { SviZahteviComponent } from './svi-zahtevi/svi-zahtevi.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { PonudaComponent } from './ponuda/ponuda.component';
     LoginComponent,
     FirmRegistrationComponent,
     ZahtevZaNabavkuComponent,
-    PonudaComponent
+    PonudaComponent,
+    SviZahteviComponent
   ],
   imports: [
     FormsModule,

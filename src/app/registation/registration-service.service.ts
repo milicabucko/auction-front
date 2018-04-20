@@ -62,4 +62,13 @@ export class RegistrationServiceService {
     return this.http.get(this.url + "/ponude/getAllActiveUserTasks/" + korisnikID).map(res =>res.json());
   }
 
+  getAllUserRequests(korisnikID) {
+    return this.http.get(this.url + "/ponude/ponude/getSviKorisnikoviZahtevi/"+korisnikID).map(res =>res.json());
+  }
+
+  getAllRequestOffers(zahtevId: number) {
+    return this.http.get(this.url + "/ponude/zahtev/getSvePonude/" + zahtevId).map(res =>res.json());
+  }
+  
+
 }

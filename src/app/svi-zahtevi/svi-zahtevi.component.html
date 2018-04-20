@@ -1,0 +1,11 @@
+<div *ngFor="let zahtev of zahtevi">
+  <button mat-button (click)="getPonude(zahtev.id)">{{zahtev.id}}</button>
+</div>
+
+<div *ngFor="let ponuda of ponude">
+  <p>Firma: {{ponuda.firma.imeFirme}}</p>
+  <p>Cena: {{ponuda.cena}}</p>
+  <p>Rok za izvrsavanje: {{ponuda.rokZaIzvrsavanje}}</p>
+  <p>Poeni: {{ponuda.poeni}}</p>
+  <p>-----------------------------------</p>
+</div>
