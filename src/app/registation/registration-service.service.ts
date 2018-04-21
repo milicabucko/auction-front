@@ -70,6 +70,10 @@ export class RegistrationServiceService {
     return this.http.get(this.url + "/ponude/getAllActiveUserDodatneInfoTasks/" + korisnikID).map(res =>res.json());
   }
 
+  getTasks(korisnikID) {
+    return this.http.get(this.url + "/ponude/getTasks/" + korisnikID).map(res =>res.json());
+  }
+
   getAllUserRequests(korisnikID) {
     return this.http.get(this.url + "/ponude/ponude/getSviKorisnikoviZahtevi/"+korisnikID).map(res =>res.json());
   }
@@ -92,6 +96,14 @@ export class RegistrationServiceService {
 
   otkaziZahtev(zahtevId, taskID) {
     return this.http.post(this.url + "/ponude/otkaziZahtev/" + zahtevId + "/" + taskID, null).map(res =>res.json());
+  }
+
+  saveTerminPocetkaIzvrsavanja(terminPocetkaIzvrsavanja, taskID) {
+    return this.http.post(this.url + "/ponude/terminPocetkaIzvrsavanja/" + terminPocetkaIzvrsavanja + "/" + taskID, null).map(res =>res.toString());
+  }
+
+  saveOcena(ocena, taskID, klijent) {
+    return this.http.post(this.url + "/ponude/ocena/" + ocena + "/" + taskID + "/" + klijent, null).map(res =>res.toString());
   }
   
 

@@ -55,6 +55,7 @@ import { ZahtevZaNabavkuComponent } from './zahtev-za-nabavku/zahtev-za-nabavku.
 import { PonudaComponent } from './ponuda/ponuda.component';
 import { SviZahteviComponent } from './svi-zahtevi/svi-zahtevi.component';
 import { DodInfoComponent } from './dod-info/dod-info.component';
+import { GetTasksComponent } from './get-tasks/get-tasks.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { DodInfoComponent } from './dod-info/dod-info.component';
     ZahtevZaNabavkuComponent,
     PonudaComponent,
     SviZahteviComponent,
-    DodInfoComponent
+    DodInfoComponent,
+    GetTasksComponent
   ],
   imports: [
     FormsModule,
