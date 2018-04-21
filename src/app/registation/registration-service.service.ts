@@ -58,8 +58,16 @@ export class RegistrationServiceService {
     return this.http.post(this.url + "/ponude/sacuvajPonudu/" + korisnikID + "/" + taskId, ponuda).map(res=>res.json());
   }
 
+  saveDodatneInfo(dodatneInfo, korisnikID, taskID) {
+    return this.http.post(this.url + "/ponude/saveDodatneInfo/" + dodatneInfo + "/" + korisnikID + "/" + taskID, null).map(res =>res.toString());
+  }
+
   getAllActiveUserTasks(korisnikID) {
     return this.http.get(this.url + "/ponude/getAllActiveUserTasks/" + korisnikID).map(res =>res.json());
+  }
+
+  getAllActiveUserDodatneInfoTasks(korisnikID) {
+    return this.http.get(this.url + "/ponude/getAllActiveUserDodatneInfoTasks/" + korisnikID).map(res =>res.json());
   }
 
   getAllUserRequests(korisnikID) {
@@ -68,6 +76,22 @@ export class RegistrationServiceService {
 
   getAllRequestOffers(zahtevId: number) {
     return this.http.get(this.url + "/ponude/zahtev/getSvePonude/" + zahtevId).map(res =>res.json());
+  }
+
+  odaberiPonudu(ponuda, taskID) {
+    return this.http.post(this.url + "/ponude/odaberi/" + taskID, ponuda).map(res =>res.json());
+  }
+
+  traziDodatneInfo(ponuda, zahtevZaPojasnjenje, taskID) {
+    return this.http.post(this.url + "/ponude/traziDodatneInfo/" + zahtevZaPojasnjenje + "/" + taskID, ponuda).map(res =>res.json());
+  }
+
+  ponoviPostupak(zahtevId, noviRok, taskID) {
+    return this.http.post(this.url + "/ponude/ponoviPostupak/" + zahtevId + "/" + noviRok + "/" + taskID, null).map(res =>res.json());
+  }
+
+  otkaziZahtev(zahtevId, taskID) {
+    return this.http.post(this.url + "/ponude/otkaziZahtev/" + zahtevId + "/" + taskID, null).map(res =>res.json());
   }
   
 

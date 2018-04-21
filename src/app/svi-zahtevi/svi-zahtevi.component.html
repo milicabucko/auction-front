@@ -1,11 +1,50 @@
+<h2> Svi zahtevi </h2>
+
 <div *ngFor="let zahtev of zahtevi">
-  <button mat-button (click)="getPonude(zahtev.id)">{{zahtev.id}}</button>
+  <button mat-button (click)="aktivanZahtev = zahtev;getPonude(zahtev.id)">{{zahtev.id}}</button>
 </div>
+
+
+<p>
+  Ukoliko zelite da otkazete zahtev, kliknite na iznad na zahtev koji zelite da otkazete i zatim kliknite 
+  na dugme otkazi ispod!
+</p>
+<button mat-button (click)="otkaziZahtev(rokZaPonude)">Otkazi zahtev</button>
+
+<p>
+  Ukoliko zelite da ponovite postupak za trazenje ponuda vaseg zahteva izaberite novi rok iz
+  ovog kalendara i kliknite na dugme ponovi!
+</p>
+
+<input [matDatepicker]="dpicker" 
+                matInput
+                placeholder="Rok za ponude"
+                class="form-control"
+                [(ngModel)]="rokZaPonude" >
+  <mat-datepicker-toggle matSuffix [for]="dpicker">
+  </mat-datepicker-toggle>
+  <mat-datepicker #dpicker></mat-datepicker>
+
+  <button mat-button (click)="ponoviPostupak(rokZaPonude)">Ponovi</button>
+
+<p>
+  Ukoliko trazite dodatne informacije o nekoj ponudi upisite u polje ispod sta trazite,
+  a onda kliknite na dugme Trazi dodatne informacije odredjene ponude!
+</p>
+
+<textarea [(ngModel)]="dodatneInfo"></textarea>
+<br>
+<br>
+
+<h2> Sve ponude </h2>
 
 <div *ngFor="let ponuda of ponude">
   <p>Firma: {{ponuda.firma.imeFirme}}</p>
   <p>Cena: {{ponuda.cena}}</p>
   <p>Rok za izvrsavanje: {{ponuda.rokZaIzvrsavanje}}</p>
   <p>Poeni: {{ponuda.poeni}}</p>
+  <p>Pojasnjenje: {{ponuda.pojasnjenje}}</p>
+  <button mat-button (click)="odaberiPonudu(ponuda)">Odaberi ponudu</button>
+  <button mat-button (click)="traziDodatneInfo(ponuda, dodatneInfo)">Trazi dodatne informacije</button>
   <p>-----------------------------------</p>
 </div>

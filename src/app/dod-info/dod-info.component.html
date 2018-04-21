@@ -1,0 +1,23 @@
+<div *ngFor="let task of activeTasks">
+  <button mat-button (click)="activeTask=task">{{task}}</button>
+</div>
+
+<h1> Aktivan task: {{activeTask}} </h1>
+
+<form [formGroup]="dodatneInfoForm" (submit) = "save()">
+
+  <div class="form-group">
+    <mat-form-field>
+      <textarea type="text"
+              matInput 
+              placeholder="Dodatne info" 
+              class="form-control"
+              formControlName="dodatneInfo" 
+              required>
+      </textarea>
+    </mat-form-field>
+  </div>
+
+  <button mat-button type="submit" [disabled] = "!dodatneInfoForm.valid">Sacuvaj!</button>
+
+</form>

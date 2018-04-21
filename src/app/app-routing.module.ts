@@ -8,6 +8,7 @@ import { FirmRegistrationComponent } from './firm-registration/firm-registration
 import { ZahtevZaNabavkuComponent } from './zahtev-za-nabavku/zahtev-za-nabavku.component';
 import { PonudaComponent } from './ponuda/ponuda.component';
 import { SviZahteviComponent } from './svi-zahtevi/svi-zahtevi.component';
+import { DodInfoComponent } from './dod-info/dod-info.component';
 
 const routes : Routes = [
   { path: 'registration', component: RegistationComponent},
@@ -15,7 +16,8 @@ const routes : Routes = [
   { path: 'login', component:LoginComponent},
   { path: 'zahtevZaNabavku/:korisnikID', component:ZahtevZaNabavkuComponent},
   { path: 'ponuda/:korisnikID', component:PonudaComponent},
-  { path: 'sviZahtevi/:korisnikID', component:SviZahteviComponent}
+  { path: 'sviZahtevi/:korisnikID', component:SviZahteviComponent},
+  { path: 'dodatneInfo/:korisnikID', component:DodInfoComponent}
 ]
 
 @NgModule({
@@ -29,4 +31,4 @@ const routes : Routes = [
 export class AppRoutingModule { }
 export const routingComponents = [RegistationComponent, FirstPageComponent, LoginComponent,
                                  FirmRegistrationComponent, ZahtevZaNabavkuComponent,
-                                 PonudaComponent, SviZahteviComponent]
+                                 PonudaComponent, SviZahteviComponent, DodInfoComponent]
