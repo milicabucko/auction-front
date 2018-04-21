@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { RegistrationServiceService } from '../registation/registration-service.service';
 
 @Component({
   selector: 'app-login',
@@ -7,12 +10,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  loginForm: FormGroup;
+
+  constructor(private router: Router, private registrationService: RegistrationServiceService) { }
 
   ngOnInit() {
+
+    this.loginForm = new FormGroup({
+      korisnickoIme: new FormControl('',[Validators.required]),
+      lozinka: new FormControl('',[Validators.required])
+    });
   }
 
   login(){
+    this.registrationService.login(this.loginForm.value.korisnickoIme, this.loginForm.value.lozinka).subscribe(data=>{
+      if (data.id!=0){
+        this.router.navigate(['/firstPage', data.id]);
+      }
+      else {
+        alert("Pogresno korisnicko ime ili lozinka!");
+      }
+    })
     
 
   }

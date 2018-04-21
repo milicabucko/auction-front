@@ -37,6 +37,13 @@ export class RegistrationServiceService {
     return this.http.get(this.url + "/registration/atp").map(res=>res.json());
   }
   
+  login(kime, loz) {
+    return this.http.get(this.url + "/registration/login/" + kime + "/" + loz).map(res=>res.json());
+  }
+
+  getActiveUser(id) {
+    return this.http.get(this.url + "/registration/activeUser/" + id).map(res=>res.json());
+  }
 
   kategorijeFirme() {
     return this.http.get(this.url + "/registration/kategorije").map(res =>res.json());

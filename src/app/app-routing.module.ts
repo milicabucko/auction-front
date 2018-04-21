@@ -13,7 +13,7 @@ import { GetTasksComponent } from './get-tasks/get-tasks.component';
 
 const routes : Routes = [
   { path: 'registration', component: RegistationComponent},
-  { path: 'firstPage', component:FirstPageComponent},
+  { path: 'firstPage/:korisnikID', component:FirstPageComponent},
   { path: 'login', component:LoginComponent},
   { path: 'zahtevZaNabavku/:korisnikID', component:ZahtevZaNabavkuComponent},
   { path: 'ponuda/:korisnikID', component:PonudaComponent},
